@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,7 +32,7 @@ public class Block {
         int count = 0;
 
         while(true){
-            if(treeHeight % 2 == 1){
+            if(treeHeight == 1){
                 treeHeight = count;
                 break;
             }
@@ -49,7 +50,7 @@ public class Block {
         }
 
 //TODO
-        lstChild = new ArrayList<>(lstLeaf); //not working ..how do i copy lists
+        lstChild = new ArrayList<MerkleNode>(lstLeaf); //still testing....
         System.out.println("lstChild size: " + lstChild.size());
         for(int i = 0; i < treeHeight; i++) {
             for(int j = 0; j < lstChild.size() / 2; j += 2) {
