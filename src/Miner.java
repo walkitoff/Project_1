@@ -22,11 +22,19 @@ public class Miner implements Runnable{
      * @return
      */
     public boolean doProofOfWork(Block oBlock) {
+    //TODO:
+        StringBuilder sb = new StringBuilder();
+        String sDifficulty = "";
 
-//TODO:
-//		#####################
-//		### ADD CODE HERE ###
-//		#####################
+        while(sDifficulty.length() < oBlock.getDifficulty()){
+            sb.append("0");
+        }
+        sDifficulty = sb.toString();
+
+
+
+
+
         return false; //FIXME
     }
 
