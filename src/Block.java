@@ -14,7 +14,6 @@ public class Block {
     private String sHash;
 
 
-
     /**
      * This computes the Merkle Root. It either accepts 2 or 4 items, or if made to be dynamic, then accepts any
      * multiple of 2 (2,4,8.16.32,etc.) items.
