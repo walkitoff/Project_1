@@ -22,8 +22,13 @@ public class Block {
      * @return
      */
     public synchronized String computeMerkleRoot(ArrayList<String> lstItems) {
-//TODO:
-        ArrayList<MerkleNode> lstLeaf = new ArrayList<>();
+//DONE:
+        // check for valid input
+        if(lstItems.size() % 2 != 0){
+            System.out.println("Block.computeMerkleRoot(lstItems) FAILED: \nLeafs not Multiple of 2!");
+            return "";
+        }
+
         ArrayList<MerkleNode> lstParent = new ArrayList<>();
         ArrayList<MerkleNode> lstChild = new ArrayList<>();
         MerkleNode temp;
@@ -39,36 +44,35 @@ public class Block {
             count++;
             treeHeight = treeHeight / 2;
         }
-        //TODO: remove before submit
-        // System.out.println("\nTreeHeight: " + treeHeight);
 
-        //generate hash for lstLeafs
+        //generate hash from lstItems and store in lstParent as the Leafs
         for(int i = 0; i < lstItems.size(); i++) {
             temp = new MerkleNode();
             temp.sHash = BlockchainUtil.generateHash(lstItems.get(i));
             temp.oLeft = null;  //leafs have no children
             temp.oRight = null; //leafs have no children
-            lstLeaf.add(temp);
+            lstParent.add(temp);
         }
 
-//TODO
-        lstChild = new ArrayList<>(lstLeaf);
-        System.out.println("\nb4 loop starts: #of leafs = lstChild size: " + lstChild.size());
+        //TODO: remove print before submit
+        System.out.println("\nb4 loop starts: #of leafs = lstParent size: " + lstParent.size());
 
+        // goes lstItems > parent, then parent > child until root found.
         for(int i = 0; i < treeHeight; i++) {
-            for(int j = 0, k = 0; j < lstChild.size() / 2; j++, k += 2) {
+            for(int j = 0, k = 0; j < lstParent.size() / 2; j++, k += 2) {
                 temp = new MerkleNode();
-                populateMerkleNode(temp, lstChild.get(k), lstChild.get(k + 1));
-                lstParent.add(temp);
+                populateMerkleNode(temp, lstParent.get(k), lstParent.get(k + 1));
+                lstChild.add(temp);
             }
-            if(lstParent.size() == 1) {
-                this.sMerkleRoot = lstParent.get(0).sHash; //todo: possibly needs to be removed and use method Block.setMerkleRoot() instead
-                return lstParent.get(0).sHash;
+            if(lstChild.size() == 1) {
+                this.sMerkleRoot = lstChild.get(0).sHash; //todo: possibly needs to be removed and use method Block.setMerkleRoot() instead/outside class
+                return lstChild.get(0).sHash;
             }
-            lstChild = new ArrayList<>(lstParent);
-            lstParent = new ArrayList<>(); //erases lstParent
+            lstParent = new ArrayList<>(lstChild);  //child becomes the parent for next iteration
+            lstChild = new ArrayList<>(); // child is reset to empty list
         }
 
+        //below code should never get ran.
         System.out.println("SOMETHING FAILED INSIDE:  Block.computeMerkleRoot()");
         return "SOMETHING FAILED";
     }
