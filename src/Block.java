@@ -145,6 +145,7 @@ public class Block {
         // These merkle root hashes based on "t1","t2" for two items, and then "t3","t4" added for four items.
         String sExpectedMerkleRoot_2Items = "3269f5f93615478d3d2b4a32023126ff1bf47ebc54c2c96651d2ac72e1c5e235";
         String sExpectedMerkleRoot_4Items = "e08f7b0331197112ff8aa7acdb4ecab1cfb9497cbfb84fb6d54f1cfdb0579d69";
+        String sExpectedMerkleRoot_8Items = "36941ee71cbbb9196c4691026e68c8be5605332842a766bf069d631d2c7c8d47";
 
         lstItems.add("t1");
         lstItems.add("t2");
@@ -184,5 +185,27 @@ public class Block {
             System.out.println("Received: " + sMerkleRoot);
 
         }
+
+        // *** BEGIN TEST 8 ITEMS ***
+
+        lstItems.add("t5");
+        lstItems.add("t6");
+        lstItems.add("t7");
+        lstItems.add("t8");
+        sMerkleRoot = oBlock.computeMerkleRoot(lstItems);
+
+        if(sMerkleRoot.equals(sExpectedMerkleRoot_8Items)){
+
+            System.out.println("Merkle root method for 8 items worked!");
+        }
+
+        else{
+            System.out.println("Merkle root method for 8 items failed!");
+            System.out.println("Expected: " + sExpectedMerkleRoot_8Items);
+            System.out.println("Received: " + sMerkleRoot);
+
+        }
+
+
     }
 }

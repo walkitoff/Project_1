@@ -25,17 +25,31 @@ public class Miner implements Runnable{
     //TODO:
         StringBuilder sb = new StringBuilder();
         String sDifficulty = "";
+        int iNonce = 0;
 
         while(sDifficulty.length() < oBlock.getDifficulty()){
             sb.append("0");
+            sDifficulty = sb.toString();
         }
-        sDifficulty = sb.toString();
+
+        while(true){
+            if(bAbortPoW){
+                bAbortPoW = false;
+                System.out.println("[miner] Aborted mining block, probably because another confirmed block received.");
+                return false;
+            }
+            else{
+                oBlock.setNonce("" + iNonce); //value for sNonce
+                oBlock.setHash(oBlock.computeHash());
+
+                if(oBlock.getHash().startsWith(sDifficulty)){
+                    return true;
+                }
+                iNonce++;
+            }
+        }
 
 
-
-
-
-        return false; //FIXME
     }
 
 
