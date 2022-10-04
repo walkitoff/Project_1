@@ -12,11 +12,15 @@ public class P2PMessageQueue {
      * @param oMessage
      */
     public synchronized void enqueue(P2PMessage oMessage){
-
 //TODO:
-//		#####################
-//		### ADD CODE HERE ###
-//		#####################
+//      if
+//      head is null
+//      set head & tail == new message
+//		else
+//      tail.next = new message
+//      tail = new message
+//      tail.next = null???
+
     }
 
 
@@ -27,10 +31,19 @@ public class P2PMessageQueue {
     public synchronized P2PMessage dequeue(){
 
 //TODO:
-//		#####################
-//		### ADD CODE HERE ###
-//		#####################
-        return head; //FIXME
+//		if
+//		head is null
+//      return null;
+//		else
+//      create: P2PMessage tempP2P = head;
+//      set this.head = next
+//      return tempP2P;
+        if(head == null){
+            return null;
+        }
+        P2PMessage tempP2P = this.head;
+        this.head = head.next;
+        return tempP2P;
     }
 
 
