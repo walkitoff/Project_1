@@ -3,7 +3,7 @@
  */
 public class P2PMessageQueue {
 
-    private P2PMessage head = null;
+    public P2PMessage head = null;
     private P2PMessage tail = null;
 
 

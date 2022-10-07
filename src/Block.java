@@ -136,27 +136,6 @@ public class Block {
      * @param args
      */
     public static void main(String[] args){
-        //TODO: TEST P2PMessageQueue
-        P2PMessage test1 = new P2PMessage();
-        P2PMessage test2 = new P2PMessage();
-        P2PMessage test3 = new P2PMessage();
-
-        P2PMessageQueue Q = new P2PMessageQueue();
-
-        test1.setMessage("test1");
-        test2.setMessage("test2");
-        test3.setMessage("test3");
-
-        Q.enqueue(test1);
-        System.out.println();
-        Q.enqueue(test2);
-        System.out.println();
-        Q.enqueue(test3);
-        System.out.println();
-
-
-        //TODO: END TEST
-
 
         ArrayList<String> lstItems = new ArrayList<>();
         Block oBlock = new Block();

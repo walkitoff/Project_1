@@ -18,11 +18,11 @@ public class Miner implements Runnable{
 
     /**
      * PoW is where miner keeps trying incrementing nonce until hash begins with as many 0s as the difficulty specifies.
-     * @param oBlock
-     * @return
+     * @param oBlock merkleRoot calculated in block
+     * @return boolean
      */
     public boolean doProofOfWork(Block oBlock) {
-    //TODO:
+//DONE
         StringBuilder sb = new StringBuilder();
         String sDifficulty = "";
         int iNonce = 0;
