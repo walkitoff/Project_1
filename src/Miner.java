@@ -39,7 +39,7 @@ public class Miner implements Runnable{
                 return false;
             }
             else{
-                oBlock.setNonce("" + iNonce); //value for sNonce
+                oBlock.setNonce("" + iNonce); //update value for sNonce
                 oBlock.setHash(oBlock.computeHash());
 
                 if(oBlock.getHash().startsWith(sDifficulty)){

@@ -34,7 +34,7 @@ public class Block {
         int treeHeight = lstItems.size();
         int count = 0;
 
-        //get tree Height  aka: 2 leafs = height of 1...hmm
+        //get tree Height
         while(true){
             if(treeHeight % 2 == 1){
                 treeHeight = count;
@@ -56,7 +56,7 @@ public class Block {
         //TODO: remove print before submit
         System.out.println("\nb4 loop starts: #of leafs = lstParent size: " + lstParent.size());
 
-        // goes lstItems > parent, then parent > child until root found.
+        // goes lstItems -> parent, then parent -> child until root found.
         for(int i = 0; i < treeHeight; i++) {
             for(int j = 0, k = 0; j < lstParent.size() / 2; j++, k += 2) {
                 temp = new MerkleNode();
@@ -64,7 +64,7 @@ public class Block {
                 lstChild.add(temp);
             }
             if(lstChild.size() == 1) {
-                this.sMerkleRoot = lstChild.get(0).sHash; //todo: possibly needs to be removed and use method Block.setMerkleRoot() instead/outside class
+              //  this.sMerkleRoot = lstChild.get(0).sHash; //todo: possibly needs to be removed and use method Block.setMerkleRoot() instead/outside class
                 return lstChild.get(0).sHash;
             }
             lstParent = new ArrayList<>(lstChild);  //child becomes the parent for next iteration
@@ -123,9 +123,8 @@ public class Block {
     }
 
     public String getHash() { return sHash; }
-    public void setHash(String h) {
-        this.sHash = h;
-    }
+
+    public void setHash(String h) {this.sHash = h; }
 
     public synchronized void setMerkleRoot(String merkleRoot) { this.sMerkleRoot = merkleRoot; }
 
@@ -137,6 +136,27 @@ public class Block {
      * @param args
      */
     public static void main(String[] args){
+        //TODO: TEST P2PMessageQueue
+        P2PMessage test1 = new P2PMessage();
+        P2PMessage test2 = new P2PMessage();
+        P2PMessage test3 = new P2PMessage();
+
+        P2PMessageQueue Q = new P2PMessageQueue();
+
+        test1.setMessage("test1");
+        test2.setMessage("test2");
+        test3.setMessage("test3");
+
+        Q.enqueue(test1);
+        System.out.println();
+        Q.enqueue(test2);
+        System.out.println();
+        Q.enqueue(test3);
+        System.out.println();
+
+
+        //TODO: END TEST
+
 
         ArrayList<String> lstItems = new ArrayList<>();
         Block oBlock = new Block();

@@ -9,14 +9,8 @@ public class P2PMessage {
     public P2PMessage next = null;
 
 
+    public void setMessage(String sMessage){ this.sMessage = sMessage; }
 
-    public void setMessage(String sMessage){
+    public String getMessage(){ return sMessage; }
 
-        this.sMessage = sMessage;
-    }
-
-    public String getMessage(){
-
-        return sMessage;
-    }
 }

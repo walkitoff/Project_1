@@ -12,14 +12,16 @@ public class P2PMessageQueue {
      * @param oMessage
      */
     public synchronized void enqueue(P2PMessage oMessage){
-//TODO:
-//      if
-//      head is null
-//      set head & tail == new message
-//		else
-//      tail.next = new message
-//      tail = new message
-//      tail.next = null???
+//DONE
+        if(this.head == null){
+            //head & tail point to same address if only 1 message is the queue
+            this.head = oMessage;
+            this.tail = oMessage;
+        }else{
+            this.tail.next = oMessage; //message address gets stored in tail.next, which is also the deepest .next of head
+            this.tail = oMessage;   //now tail points to the last address of head ie head.next.next.next ... depending how long the queue is
+            this.tail.next = null;
+        }
 
     }
 
@@ -29,31 +31,21 @@ public class P2PMessageQueue {
      * @return
      */
     public synchronized P2PMessage dequeue(){
-
-//TODO:
-//		if
-//		head is null
-//      return null;
-//		else
-//      create: P2PMessage tempP2P = head;
-//      set this.head = next
-//      return tempP2P;
-        if(head == null){
+//DONE
+        if(this.head == null){
             return null;
         }
-        P2PMessage tempP2P = this.head;
-        this.head = head.next;
-        return tempP2P;
+
+        P2PMessage oTempMsg = this.head; //store the obj at the front of line
+        this.head = head.next; //move next in line to front of line
+        return oTempMsg; //return obj removed from queue aka from the linked list.
     }
 
 
     public boolean hasNodes(){
-
-//TODO:
-//		#####################
-//		### ADD CODE HERE ###
-//		#####################
-        return false; //FIXME
+//DONE:   if QUEUE is empty, return false else return true
+        return (this.head != null);
     }
+
 }
 
