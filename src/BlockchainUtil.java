@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Scanner;
@@ -13,8 +14,7 @@ public class BlockchainUtil {
      * @return
      */
     public static synchronized String generateHash(String sOriginal){
-
-//TODO: run tests
+//DONE:
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] btEncodedhash = digest.digest(
@@ -31,6 +31,7 @@ public class BlockchainUtil {
             System.out.println("Error generating hash: " + ex.getMessage());
             return null;
         }
+
     }
 
 
@@ -40,11 +41,11 @@ public class BlockchainUtil {
      * @return
      */
     public String promptUser(String sQuestion){
-
         // Using input dialog:
-        //return JOptionPane.showInputDialog(sQuestion);
+//        p(sQuestion);
+//        return JOptionPane.showInputDialog(sQuestion);
 
-        // Using Scanner:
+//      Using Scanner:
         System.out.print(sQuestion);
         Scanner oCommandInput = new Scanner(System.in);
 
@@ -76,5 +77,7 @@ public class BlockchainUtil {
         catch(Exception ex){
             // do nothing.
         }
+
     }
+
 }

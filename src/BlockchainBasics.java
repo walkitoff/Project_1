@@ -52,7 +52,7 @@ public class BlockchainBasics {
         while(true){
 
             String sTransaction = u.promptUser("Enter Transaction: ");
-
+//TODO: I think implement P2PMessageQueue here
             if(sSend.equals("y")) {
                 String sReply = P2PUtil.connectForOneMessage(sRemoteMinerIP, iRemoteMinerPort, sTransaction);
                 u.p("[main] Reply from server: " + sReply);

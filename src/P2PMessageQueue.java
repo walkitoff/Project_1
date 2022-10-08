@@ -9,7 +9,7 @@ public class P2PMessageQueue {
 
     /**
      * This method allows adding a message object to the existing queue.
-     * @param oMessage
+     * @param oMessage P2PMessage type
      */
     public synchronized void enqueue(P2PMessage oMessage){
 //DONE
@@ -28,7 +28,7 @@ public class P2PMessageQueue {
 
     /**
      * This method allows removing a message object from the existing queue.
-     * @return
+     * @return the removed P2PMessage at head of queue
      */
     public synchronized P2PMessage dequeue(){
 //DONE
