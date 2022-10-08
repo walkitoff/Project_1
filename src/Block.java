@@ -8,7 +8,7 @@ public class Block {
 
 
     private String sMerkleRoot;
-    private int iDifficulty = 5; // Mining seconds in testing 5: 6,10,15,17,20,32 | testing 6: 12,289,218
+    private int iDifficulty = 6; // Mining seconds in testing 5: 6,10,15,17,20,32 | testing 6: 12,289,218
     private String sNonce;
     private String sMinerUsername;
     private String sHash;
@@ -17,8 +17,8 @@ public class Block {
     /**
      * This computes the Merkle Root. It either accepts 2 or 4 items, or if made to be dynamic, then accepts any
      * multiple of 2 (2,4,8.16.32,etc.) items.
-     * @param lstItems
-     * @return
+     * @param lstItems list of strings for use in generating the Merkle Root hash
+     * @return Merkle Root hash
      */
     public synchronized String computeMerkleRoot(ArrayList<String> lstItems) {
 //DONE:
@@ -53,10 +53,10 @@ public class Block {
             lstParent.add(temp);
         }
 
-        //TODO: remove print before submit
+//TODO: remove print before submit
         System.out.println("\nb4 loop starts: #of leafs = lstParent size: " + lstParent.size());
 
-        // goes lstItems -> parent, then parent -> child until root found.
+        //Order goes lstItems -> parent, then parent -> child until root found.
         for(int i = 0; i < treeHeight; i++) {
             for(int j = 0, k = 0; j < lstParent.size() / 2; j++, k += 2) {
                 temp = new MerkleNode();
@@ -64,7 +64,6 @@ public class Block {
                 lstChild.add(temp);
             }
             if(lstChild.size() == 1) {
-              //  this.sMerkleRoot = lstChild.get(0).sHash; //todo: possibly needs to be removed and use method Block.setMerkleRoot() instead/outside class
                 return lstChild.get(0).sHash;
             }
             lstParent = new ArrayList<>(lstChild);  //child becomes the parent for next iteration
@@ -80,9 +79,9 @@ public class Block {
 
     /**
      * This method populates a Merkle node's left, right, and hash variables.
-     * @param oNode
-     * @param oLeftNode
-     * @param oRightNode
+     * @param oNode MerkleNode
+     * @param oLeftNode left node
+     * @param oRightNode right node
      */
     private void populateMerkleNode(MerkleNode oNode, MerkleNode oLeftNode, MerkleNode oRightNode){
 
@@ -97,7 +96,7 @@ public class Block {
 
     /**
      * This generates the hash for this block by combining the properties and hashing them.
-     * @return
+     * @return miner's hash from Block fields sMerkleRoot, iDifficulty, sMinerUsername & sNonce
      */
     public String computeHash() {
 
@@ -133,7 +132,7 @@ public class Block {
 
     /**
      * Run this to test your merkle tree logic.
-     * @param args
+     * @param args ...
      */
     public static void main(String[] args){
 

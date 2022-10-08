@@ -9,7 +9,7 @@ public class BlockchainBasics {
 
     /**
      * This method manages the UI interaction and spawns off the Miner and P2PServer threads.
-     * @param args
+     * @param args ...
      */
     public static void main(String[] args){
 
@@ -52,7 +52,7 @@ public class BlockchainBasics {
         while(true){
 
             String sTransaction = u.promptUser("Enter Transaction: ");
-//TODO: I think implement P2PMessageQueue here
+
             if(sSend.equals("y")) {
                 String sReply = P2PUtil.connectForOneMessage(sRemoteMinerIP, iRemoteMinerPort, sTransaction);
                 u.p("[main] Reply from server: " + sReply);

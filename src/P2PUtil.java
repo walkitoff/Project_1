@@ -11,28 +11,28 @@ public class P2PUtil {
 
     /**
      * Allows a one time socket call to a server, gets reply, and then closes connection.
-     * @param sIP
-     * @param iPort
-     * @param sMessage
-     * @return
+     * @param sIP IP address of the server
+     * @param iPort port the server is listening on
+     * @param sMessage message to send to the server
+     * @return return sent message
      */
     public static String connectForOneMessage(String sIP, int iPort, String sMessage){
 
 //TODO:
         try(Socket oSocket = new Socket()){
 
-            // Attempt to connect to the server
+            //Attempt to connect to the server
             oSocket.connect(new InetSocketAddress(sIP, iPort), 5000);
 
-            //Preparing for output
+            //setup writer for output
             OutputStream output = oSocket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
 
-            // Send message
+            // Send message to server
             writer.println(sMessage);
             writer.flush();
 
-            // get reply from server:
+            // get reply from server
             InputStream input = oSocket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
