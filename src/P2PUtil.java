@@ -18,7 +18,7 @@ public class P2PUtil {
      */
     public static String connectForOneMessage(String sIP, int iPort, String sMessage){
 
-//TODO:
+//DONE:
         try(Socket oSocket = new Socket()){
 
             //Attempt to connect to the server

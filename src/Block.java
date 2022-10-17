@@ -8,7 +8,7 @@ public class Block {
 
 
     private String sMerkleRoot;
-    private int iDifficulty = 6; // Mining seconds in testing 5: 6,10,15,17,20,32 | testing 6: 12,289,218
+    private int iDifficulty = 5; // Mining seconds in testing 5: 6,10,15,17,20,32 | testing 6: 12,289,218
     private String sNonce;
     private String sMinerUsername;
     private String sHash;
@@ -53,8 +53,6 @@ public class Block {
             lstParent.add(temp);
         }
 
-//TODO: remove print before submit
-        System.out.println("\nb4 loop starts: #of leafs = lstParent size: " + lstParent.size());
 
         //Order goes lstItems -> parent, then parent -> child until root found.
         for(int i = 0; i < treeHeight; i++) {
